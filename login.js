@@ -1,30 +1,23 @@
-import { account } from "./appwriteClient.js";
+import { auth } from "./firebaseConfig.js";
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } 
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const provider = new GoogleAuthProvider();
 
 // ✅ تحقق إذا المستخدم مسجل دخول بالفعل
-async function checkLogin() {
-  try {
-    const user = await account.get();
-    if (user) {
-      // لو مسجل دخول يروح على الصفحة الرئيسية
-      window.location.href = "nqp.html";
-    }
-  } catch (error) {
-    console.log("المستخدم غير مسجل دخول");
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = "dashboard.html";
   }
-}
+});
 
 // ✅ تسجيل الدخول بجوجل
 document.getElementById("loginBtn").addEventListener("click", async () => {
   try {
-    account.createOAuth2Session(
-      "google",               // مزود تسجيل الدخول
-      "https://nqp.appwrite.network/nqb.html", // رابط النجاح
-      "https:/nqp.appwrite.network/login"      // رابط الفشل
-    );
+    await signInWithPopup(auth, provider);
+    window.location.href = "dashboard.html";
   } catch (error) {
     console.error("خطأ أثناء تسجيل الدخول:", error.message);
   }
 });
 
-// تشغيل التحقق
-checkLogin();
