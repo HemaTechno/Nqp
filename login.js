@@ -15,7 +15,7 @@ onAuthStateChanged(auth, (user) => {
 document.getElementById("loginBtn").addEventListener("click", async () => {
   try {
     await signInWithPopup(auth, provider);
-    window.location.href = "dashboard.html";
+    window.location.href = "nqb.html";
   } catch (error) {
     console.error("خطأ أثناء تسجيل الدخول:", error.message);
   }
