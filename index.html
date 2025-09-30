@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursing Q-Bank - بنك الأسئلة التمريضي</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+        
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --secondary: #34a853;
+            --accent: #fbbc05;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --medical-blue: #e3f2fd;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .medical-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(52, 168, 83, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .medical-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a73e8' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .logo-container {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 20px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 25px rgba(26, 115, 232, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            z-index: 1;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .medical-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 2rem;
+        }
+        
+        .medical-icon:nth-child(1) { top: 15%; left: 15%; }
+        .medical-icon:nth-child(2) { top: 15%; right: 15%; }
+        .medical-icon:nth-child(3) { bottom: 15%; left: 15%; }
+        .medical-icon:nth-child(4) { bottom: 15%; right: 15%; }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, #2e7d32 100%);
+            box-shadow: 0 4px 15px rgba(52, 168, 83, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 168, 83, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .notification {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-right: 4px solid #ffc107;
+            animation: pulse 2s infinite;
+        }
+        
+        .copyright {
+            font-size: 0.75rem;
+            color: #6b7280;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- الخلفية الطبية -->
+    <div class="medical-bg"></div>
+    <div class="medical-pattern"></div>
+
+    <!-- البطاقة الرئيسية -->
+    <div class="main-card p-8 w-full max-w-2xl relative">
+        <!-- شعار الموقع -->
+        <div class="logo-container floating">
+            <img src="https://i.ibb.co/DHPFGmF7/20250930-185719.png" alt="شعار Nursing Q-Bank" class="logo">
+            
+            <!-- أيقونات طبية زخرفية -->
+            <i class="medical-icon fas fa-stethoscope"></i>
+            <i class="medical-icon fas fa-heartbeat"></i>
+            <i class="medical-icon fas fa-user-md"></i>
+            <i class="medical-icon fas fa-plus-square"></i>
+        </div>
+        
+        <!-- العنوان الرئيسي -->
+        <h1 class="text-3xl font-bold mb-2 text-gray-800 text-center">Nursing Q-Bank</h1>
+        <p class="text-gray-600 mb-6 text-center text-xl">بنك الأسئلة التمريضي المتقدم</p>
+        
+        <!-- رسالة تعريفية -->
+        <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6">
+            <p class="text-blue-700 text-center">
+                <strong>ملاحظة هامة:</strong> هذا الموقع هو بنك أسئلة تمريضي مستقل 
+                <span class="font-bold text-red-600">وليس له أي علاقة بأي جامعة أو مؤسسة تعليمية</span>. 
+                نحن نقدم محتوى تعليميًا لمساعدة الممرضين والممرضات على تطوير مهاراتهم.
+            </p>
+        </div>
+        
+        <!-- إشعار التليجرام -->
+        <div id="telegramNotification" class="notification rounded-xl p-4 mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fab fa-telegram text-blue-500 text-2xl"></i>
+                    <div>
+                        <h3 class="font-bold text-amber-800">انضم إلى قناة التليجرام</h3>
+                        <p class="text-amber-700 text-sm">لمتابعة كل الأخبار ومعرفة مواعيد الأسئلة الجديدة</p>
+                    </div>
+                </div>
+                <button id="closeNotification" class="text-amber-700 hover:text-amber-900">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex gap-3 mt-4">
+                <button id="joinTelegram" class="btn-primary text-white py-2 px-4 rounded-lg font-medium flex-1 flex items-center justify-center gap-2">
+                    <i class="fab fa-telegram"></i>
+                    دخول إلى القناة
+                </button>
+                <button id="remindLater" class="btn-outline py-2 px-4 rounded-lg font-medium">
+                    لاحقًا
+                </button>
+            </div>
+        </div>
+        
+        <!-- محتوى الصفحة -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="feature-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                <div class="text-center mb-4">
+                    <i class="fas fa-graduation-cap text-blue-500 text-3xl mb-2"></i>
+                    <h3 class="font-bold text-gray-800">بنك الأسئلة</h3>
+                </div>
+                <p class="text-gray-600 text-sm text-center">
+                    مجموعة شاملة من الأسئلة التمريضية المصممة لمساعدتك على اختبار وتحسين معرفتك الطبية.
+                </p>
+            </div>
+            
+            <div class="feature-card bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                <div class="text-center mb-4">
+                    <i class="fas fa-chart-line text-green-500 text-3xl mb-2"></i>
+                    <h3 class="font-bold text-gray-800">تتبع التقدم</h3>
+                </div>
+                <p class="text-gray-600 text-sm text-center">
+                    تتبع تقدمك في التعلم واحصل على تقارير مفصلة عن أدائك في مختلف المجالات التمريضية.
+                </p>
+            </div>
+        </div>
+        
+        <!-- أزرار التنقل -->
+        <div class="flex flex-col gap-4">
+            <button id="exploreQuestions" class="btn-secondary text-white py-3 rounded-xl font-medium text-lg flex items-center justify-center gap-3">
+                <i class="fas fa-search"></i>
+                استكشف الأسئلة
+            </button>
+            
+            <div class="text-center text-gray-500 text-sm mt-4">
+                <p>للاستفادة الكاملة من الموقع، ننصح بالانضمام إلى قناة التليجرام أولاً</p>
+            </div>
+        </div>
+        
+        <!-- فوتر مع حقوق النشر -->
+        <div class="mt-8 pt-6 text-center copyright">
+            <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> NQB Nursing Q-Bank</p>
+            <p class="mt-1">مخصص لمحترفي التمريض والرعاية الصحية</p>
+        </div>
+    </div>
+
+    <script>
+        // إضافة السنة الحالية لحقوق النشر
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // إغلاق إشعار التليجرام
+        document.getElementById('closeNotification').addEventListener('click', function() {
+            document.getElementById('telegramNotification').style.display = 'none';
+        });
+        
+        // زر لاحقًا
+        document.getElementById('remindLater').addEventListener('click', function() {
+            document.getElementById('telegramNotification').style.display = 'none';
+        });
+        
+        // زر الانضمام إلى التليجرام
+        document.getElementById('joinTelegram').addEventListener('click', function() {
+            // توجيه المستخدم إلى قناة التليجرام
+            window.open('https://t.me/NursingQBank', '_blank');
+        });
+        
+        // زر استكشاف الأسئلة
+        document.getElementById('exploreQuestions').addEventListener('click', function() {
+            // توجيه المستخدم إلى صفحة الأسئلة
+            window.location.href = 'nqb.html';
+        });
+    </script>
+
+</body>
+</html>
