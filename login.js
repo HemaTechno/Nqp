@@ -18,8 +18,8 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
   try {
     account.createOAuth2Session(
       "google",               // مزود تسجيل الدخول
-      "http://localhost/dashboard.html", // رابط النجاح
-      "http://localhost/login.html"      // رابط الفشل
+      "https://nqb.netlify.app/nqb.html", // رابط النجاح
+      "https://nqb.netlify.app/login"      // رابط الفشل
     );
   } catch (error) {
     console.error("خطأ أثناء تسجيل الدخول:", error.message);
