@@ -1,23 +1,87 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل الدخول</title>
+  <title>تسجيل الدخول - Nursing Q-Bank</title>
   <script type="module" src="./login.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .logo-container {
+      background: linear-gradient(135deg, #e53935 0%, #e35d5b 100%);
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 25px rgba(229, 57, 53, 0.3);
+    }
+    
+    .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .btn-glow:hover {
+      box-shadow: 0 0 20px rgba(229, 57, 53, 0.5);
+    }
+    
+    .copyright {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body class="flex items-center justify-center min-h-screen p-4">
 
-  <div class="bg-white shadow-lg rounded-2xl p-8 w-96 text-center">
-    <h1 class="text-2xl font-bold mb-4 text-gray-700">مرحباً بك 👋</h1>
-    <p class="text-gray-500 mb-6">سجل الدخول للمتابعة</p>
-
-    <button id="loginBtn" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
+  <div class="glass-effect shadow-2xl rounded-3xl p-8 w-full max-w-md relative overflow-hidden">
+    <!-- شعار الموقع -->
+    <div class="logo-container">
+      <img src="https://i.ibb.co/DHPFGmF7/20250930-185719.png" alt="شعار Nursing Q-Bank" class="logo">
+    </div>
+    
+    <!-- العنوان الرئيسي -->
+    <h1 class="text-3xl font-bold mb-2 text-gray-800">مرحباً بك 👋</h1>
+    <p class="text-gray-600 mb-6">سجل الدخول للمتابعة إلى بنك الأسئلة التمريضي</p>
+    
+    <!-- زر تسجيل الدخول -->
+    <button id="loginBtn" class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 font-medium text-lg btn-glow flex items-center justify-center gap-3">
+      <i class="fab fa-google"></i>
       تسجيل الدخول باستخدام Google
     </button>
+    
+    <!-- فوتر مع حقوق النشر -->
+    <div class="mt-8 pt-6 border-t border-gray-200 text-center copyright">
+      <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> Nursing Q-Bank (NQB)</p>
+    </div>
+    
+    <!-- زخرفة خلفية -->
+    <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-gradient-to-r from-red-100 to-red-200 rounded-full opacity-30"></div>
+    <div class="absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-r from-red-100 to-red-200 rounded-full opacity-30"></div>
   </div>
+
+  <script>
+    // إضافة السنة الحالية لحقوق النشر
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
