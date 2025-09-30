@@ -7,7 +7,7 @@ const provider = new GoogleAuthProvider();
 // ✅ تحقق إذا المستخدم مسجل دخول بالفعل
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    window.location.href = "dashboard.html";
+    window.location.href = "nqb.html";
   }
 });
 
