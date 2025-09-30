@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول</title>
+  <script type="module">
+    import { supabase } from "./supabaseClient.js"
+
+    // التحقق لو المستخدم مسجل دخول مسبقًا
+    async function checkUser() {
+      const { data, error } = await supabase.auth.getUser()
+      if (data.user) {
+        // لو فيه مستخدم بالفعل → توجه للداشبورد
+        window.location.href = "nqp.html"
+      }
+    }
+    checkUser()
+
+    // عند الضغط على زر تسجيل الدخول
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginBtn = document.getElementById("login-google")
+
+      loginBtn.addEventListener("click", async () => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+        })
+        if (error) {
+          console.error("خطأ:", error.message)
+        } else {
+          console.log("جاري تسجيل الدخول...", data)
+        }
+      })
+    })
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; background: #f5f5f5; }
+    button {
+      background: #4285F4; color: white; border: none; padding: 12px 20px;
+      border-radius: 8px; cursor: pointer; font-size: 16px;
+    }
+    button:hover { background: #3367D6; }
+  </style>
+</head>
+<body>
+  <h1>تسجيل الدخول</h1>
+  <button id="login-google">تسجيل الدخول بـ Google</button>
+</body>
+</html>
