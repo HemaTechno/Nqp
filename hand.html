@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Hygiene Quiz (40 Questions)</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .question-card {
+            border: 1px solid #ddd;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            transition: box-shadow 0.3s;
+        }
+        .question-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 18px;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .option-label {
+            display: block;
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            border: 1px solid #eee;
+        }
+        .option-label:hover {
+            background-color: #f0f0f0;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        input[type="radio"]:checked + .option-label {
+            background-color: #e9f7ff;
+            border-color: #007bff;
+            font-weight: 600;
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+            font-size: 1em;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .explanation {
+            margin-top: 15px;
+            font-size: 0.95em;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            background-color: #fffbe6;
+            color: #856404;
+            border-radius: 0 4px 4px 0;
+        }
+        .selected-option {
+            background-color: #ffeeba !important;
+            border-color: #ffc107 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hand Hygiene Quiz 🧼 (40 Questions)</h1>
+    <div id="quiz-container">
+        </div>
+</div>
+
+<script>
+    const quizQuestions = [
+        // -----------------------------------------------------
+        // 5 MOMENTS & DEFINITION (Knowledge & Recall)
+        // -----------------------------------------------------
+        {
+            id: 1,
+            question: "What is the primary definition of 'Hand Hygiene' as provided in the document?",
+            options: [
+                "The First Line of Defense Against Serious Diseases.",
+                "The process of reducing the number of bacteria on the skin surface.",
+                "The process of cleaning hands to reduce numbers of microorganisms present on the skin surface that aim to reduce the spread of infections.",
+                "Surgical scrubbing before an aseptic procedure."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Hand Hygiene is defined as 'The process of cleaning hands to reduce numbers of microorganisms present on the skin surface that aim to reduce the spread of infections.'"
+        },
+        {
+            id: 2,
+            question: "According to WHO's '5 Moments for Hand Hygiene,' when should hand hygiene be performed *to protect the patient* from the healthcare worker's hands?",
+            options: [
+                "After touching a patient.",
+                "Before clean/aseptic procedure and Before touching the patient.",
+                "After touching the patient surrounding.",
+                "After contact with any body fluids."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Moments 'Before touching the patient' and 'Before clean/aseptic procedure' are done to protect the patient."
+        },
+        {
+            id: 3,
+            question: "Which of the following is NOT listed as a 'Moment for Hand Hygiene'?",
+            options: [
+                "Before touching the patient.",
+                "After removing gloves.",
+                "After touching the patient surrounding.",
+                "After contact with any body fluids."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "The 5 moments are: Before touching patient, Before clean/aseptic procedure, After body fluid exposure risk, After touching patient, and After touching patient surroundings."
+        },
+        {
+            id: 4,
+            question: "Hand hygiene is required for anyone involved in patient care, which includes:",
+            options: [
+                "Only physicians and nurses.",
+                "Only direct patient care workers.",
+                "Any health-care worker, caregiver or person involved in direct or indirect patient care.",
+                "Only surgical team members."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The document states: 'Any health-care worker, caregiver or person involved in direct or indirect patient care needs to be concerned about hand hygiene...'"
+        },
+        {
+            id: 5,
+            question: "The moment 'After touching the patient surrounding' is primarily intended to protect:",
+            options: [
+                "The patient only.",
+                "The healthcare worker and the healthcare environment.",
+                "Other patients and the healthcare worker.",
+                "The patient from their own microorganisms."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "This moment protects the healthcare worker from patient germs and prevents their spread to the general environment or other patients."
+        },
+
+        // -----------------------------------------------------
+        // PURPOSE & METHODS (Application & Understanding)
+        // -----------------------------------------------------
+        {
+            id: 6,
+            question: "The purpose 'To prevent cross infection' means preventing the transmission of microorganisms between whom?",
+            options: [
+                "Only between patients.",
+                "Only from nurse to patient.",
+                "From nurse to patient and from patient to patient and vice versa.",
+                "From the environment to the patient only."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Cross infection is defined as the transmission of microorganisms from nurse to patient and from patient to patient and vice."
+        },
+        {
+            id: 7,
+            question: "What is the correct hand hygiene method and minimum duration for hands that are *visibly dirty*?",
+            options: [
+                "Alcohol-based rub (until hands are dry).",
+                "Soap & water (at least 40-60 seconds).",
+                "Surgical hand hygiene (~5 minutes).",
+                "Soap & water (20 seconds)."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "For visibly dirty hands, **Soap & water** is mandatory for **at least 40-60 seconds**."
+        },
+        {
+            id: 8,
+            question: "Alcohol-based hand rub is recommended for:",
+            options: [
+                "Visibly dirty hands.",
+                "Routine use when hands are not visibly soiled.",
+                "Before surgical procedures.",
+                "After contact with *all* pathogens."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Alcohol-based rub is for **routine use when hands are not visibly soiled**."
+        },
+        {
+            id: 9,
+            question: "How long should routine hand washing (soap and water) be performed?",
+            options: [
+                "15 seconds.",
+                "20 seconds.",
+                "At least 40-60 seconds.",
+                "Until hands are dry."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The time specified for Soap & water hand hygiene is **at least 40-60sec**."
+        },
+        {
+            id: 10,
+            question: "What is the recommended duration for Surgical hand hygiene (scrubbing)?",
+            options: [
+                "40-60 seconds.",
+                "Until hands are dry.",
+                "~5 minutes.",
+                "2 minutes."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Surgical hand hygiene is performed before surgical procedures and takes about **~5 Min**."
+        },
+
+        // -----------------------------------------------------
+        // PREPARATORY STEPS (Procedure Detail)
+        // -----------------------------------------------------
+        {
+            id: 11,
+            question: "What is the first step in the 'Steps of hand hygiene (Water and soap)' procedure?",
+            options: [
+                "Turn on water and wet hands.",
+                "Apply soap.",
+                "Assess your fingernails, nails must be kept short.",
+                "Ensure jewellery has been removed."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The first step listed is: '1- Assess your fingernails, nails must be kept short.'"
+        },
+        {
+            id: 12,
+            question: "Which of the following must be removed *before* starting the hand hygiene procedure?",
+            options: [
+                "Watch and wedding ring.",
+                "Only disposable wristbands.",
+                "Jewellery.",
+                "Only bracelets."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Step 3 is: 'Ensure jewellery has been removed.'"
+        },
+        {
+            id: 13,
+            question: "When standing at the sink, what is the correct body position?",
+            options: [
+                "In a comfortable position, slightly touching the sink.",
+                "Facing away from the sink.",
+                "In a comfortable position, but not touching the sink.",
+                "Leaning on the sink for support."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The instruction is: 'Stand in front of the sink in a comfortable position, but not touching the sink.'"
+        },
+        {
+            id: 14,
+            question: "When applying soap, what type of soap is listed as an option if liquid soap is not available?",
+            options: [
+                "Powdered soap.",
+                "Antiseptic scrub.",
+                "Bar soap.",
+                "Foam soap."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Step 7 mentions: 'Apply soap (if soap is liquid or bar).'"
+        },
+        {
+            id: 15,
+            question: "The sleeves must be folded to approximately how many inches above the elbow?",
+            options: [
+                "1-2 inches.",
+                "2-3 inches.",
+                "4 inches.",
+                "The document does not specify."
+            ],
+            correctAnswerIndex: 1, // Based on Q3 in Critical Thinking, which details the procedure.
+            explanation: "Although not in the main procedure, the Critical Thinking Q3 refers to the step: 'Fold sleeves approximately 2-3 inches above elbow.'"
+        },
+
+        // -----------------------------------------------------
+        // WASHING TECHNIQUE (Detailed Steps)
+        // -----------------------------------------------------
+        {
+            id: 16,
+            question: "While rubbing hands together vigorously with soap, the fingers should be kept:",
+            options: [
+                "Pointed upwards.",
+                "Interlaced.",
+                "Pointed downward.",
+                "Clasped."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Step 8 instructs: '...while keeping fingers pointed downward.'"
+        },
+        {
+            id: 17,
+            question: "Which step in the washing technique is described as 'Palm to palm with fingers interlaced'?",
+            options: [
+                "A",
+                "B",
+                "C",
+                "D"
+            ],
+            correctAnswerIndex: 2,
+            explanation: "This is step **C** in the starting washing technique."
+        },
+        {
+            id: 18,
+            question: "The technique 'Rotational rubbing of left thumb clasped in right palm and vice versa' (E) is used to clean:",
+            options: [
+                "The palms.",
+                "The dorsum of the hands.",
+                "The thumbs.",
+                "The fingertips."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Step **E** specifically targets the **thumbs**."
+        },
+        {
+            id: 19,
+            question: "What movement is used in the step to clean the backs of the fingers (D)?",
+            options: [
+                "Vigorous circular motion.",
+                "Backs of fingers to opposing palms with fingers interlocked.",
+                "Rotational rubbing, backwards and forwards.",
+                "Palm to palm rubbing."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Step D is: 'Backs of fingers to opposing palms with fingers interlocked.'"
+        },
+        {
+            id: 20,
+            question: "The technique 'Rotational rubbing, backwards and forwards with clasped fingers...' (F) is primarily used to clean which part of the hand?",
+            options: [
+                "The wrists.",
+                "The tips of the fingers (fingernails).",
+                "The entire dorsum.",
+                "The palm to palm area."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "This motion (F) is crucial for cleaning the fingertips/fingernails against the opposing palm."
+        },
+
+        // -----------------------------------------------------
+        // RINSING & DRYING (Detailed Steps & Prevention)
+        // -----------------------------------------------------
+        {
+            id: 21,
+            question: "After rinsing, what should be inspected for the presence of excess soap and dirt?",
+            options: [
+                "The palms.",
+                "The wrists.",
+                "The knuckles.",
+                "The fingertips."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Step H says: 'Inspect **knuckles** for presence of excess soap and dirt. If so, repeat the procedure.'"
+        },
+        {
+            id: 22,
+            question: "If excess soap or dirt is found on the hands after rinsing and inspection, what is the required action?",
+            options: [
+                "Rinse again and proceed to drying.",
+                "Repeat the entire hand washing procedure.",
+                "Use alcohol-based rub to clean it.",
+                "Use a dry towel to rub it off."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Step H requires to 'repeat the procedure' if excess soap or dirt is found."
+        },
+        {
+            id: 23,
+            question: "When drying hands with a towel, what kind of motion is recommended, and what is the direction?",
+            options: [
+                "Vigorous circular motion, from wrist to fingers.",
+                "Dabbing motion, from the fingers to the wrist to the lower arms.",
+                "Rubbing motion, from the lower arms to the hands.",
+                "Dabbing motion, only on the palms."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Hands should be dried using a **dapping motion** from the **fingers to the wrist to the lower arms** with a towel (Step I)."
+        },
+        {
+            id: 24,
+            question: "After washing, how should the water taps be turned off if they lack elbow or foot controls?",
+            options: [
+                "Quickly use the clean hands.",
+                "Do not turn them off; leave them running.",
+                "Use a paper towel to turn off tabs.",
+                "Use the back of the wrist."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Step G states: 'Do not touch taps with clean hands -if elbow or foot controls are not available, use **paper towel** to turn off tabs.'"
+        },
+        {
+            id: 25,
+            question: "What is the final step after drying the hands before going to the working site?",
+            options: [
+                "Use an alcohol-based rub.",
+                "Keep your hands interlocked in front of you.",
+                "Put on gloves immediately.",
+                "Show hands for inspection."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Step J is: 'Keep your hands interlocked in front of you and go to your working site.'"
+        },
+
+        // -----------------------------------------------------
+        // MISSED AREAS & EQUIPMENT (Detail & Analysis)
+        // -----------------------------------------------------
+        {
+            id: 26,
+            question: "Which of the following is listed as a commonly missed area during hand hygiene?",
+            options: [
+                "The center of the palms.",
+                "The wrists.",
+                "The backs of the forearms.",
+                "The elbow region."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "The list of missed areas includes: Tips of fingers, Between fingers Areas, Thumbs especially the backs and sides of thumbs, and **Wrists**."
+        },
+        {
+            id: 27,
+            question: "The palmar surfaces are frequently missed, especially which two areas?",
+            options: [
+                "The area between the thumb and index finger, and the middle of the palm.",
+                "The areas near the wrist and between the palm and fingers.",
+                "The fingertips and the area over the knuckles.",
+                "The dorsal surfaces and the fingers."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Missed palmar surfaces include: 'especially the areas **near the wrist and between the palm and fingers**.'"
+        },
+        {
+            id: 28,
+            question: "Which part of the thumb is specifically noted as a frequently missed area?",
+            options: [
+                "The tip only.",
+                "The joint only.",
+                "The backs and sides of thumbs.",
+                "The area clasped in the opposing palm."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The document lists: 'Thumbs especially the **backs and sides of thumbs**.'"
+        },
+        {
+            id: 29,
+            question: "Which piece of equipment is *not* required for the water and soap hand hygiene method?",
+            options: [
+                "Running water.",
+                "Soap and soap dish.",
+                "Alcohol-hand rub.",
+                "Paper towel."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Alcohol-hand rub is a method itself, not an equipment requirement for the soap and water method."
+        },
+        {
+            id: 30,
+            question: "If your hands do not look dirty, an alcohol-based hand sanitizer is recommended, provided it contains at least:",
+            options: [
+                "40% alcohol.",
+                "50% alcohol.",
+                "60% alcohol.",
+                "80% alcohol."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The document advises using a sanitizer that contains **at least 60% alcohol**."
+        },
+
+        // -----------------------------------------------------
+        // ALCOHOL-BASED RUB (ABH) & CRITICAL THINKING (Advanced)
+        // -----------------------------------------------------
+        {
+            id: 31,
+            question: "What is the crucial difference in the final step of the Alcohol-based Hand (ABH) procedure compared to the soap and water method?",
+            options: [
+                "ABH requires a longer duration (5 minutes).",
+                "ABH requires drying with a sterile towel.",
+                "ABH involves rubbing hands together until hands are dry, without rubbing off excess product.",
+                "ABH requires rinsing with water afterwards."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The final step for ABH is: 'Rubbing hands together until hands are dry before continuing with patient care, do not rub off excess product.'"
+        },
+        {
+            id: 32,
+            question: "Which step in the washing technique is *not* included in the detailed steps for Alcohol-based Hand Rub (ABH)?",
+            options: [
+                "Rub hands palm to palm.",
+                "Right palm over left dorsum with interlaced fingers.",
+                "Rinsing hands with water.",
+                "Rotational rubbing of left thumb."
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Alcohol-based rubs do not involve water, so 'Rinsing hands with water' is not a step in the ABH procedure."
+        },
+        {
+            id: 33,
+            question: "In the critical thinking scenario (cardiac arrest), which is the MOST appropriate hand hygiene action given the urgency?",
+            options: [
+                "Perform a full 40-second soap and water wash.",
+                "Use alcohol-based hand rub rapidly if time permits.",
+                "Delay resuscitation until hand hygiene is complete.",
+                "Skip hand hygiene completely due to urgency."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "In urgent, life-saving situations, the rapid application of **alcohol-based hand rub** is the most appropriate action if time permits, balancing urgency with infection control."
+        },
+        {
+            id: 34,
+            question: "The purpose 'To prevent hospital acquired infection' is essential for patient safety. This type of infection is also known as:",
+            options: [
+                "Community-acquired infection.",
+                "Nosocomial infection.",
+                "Cross-contamination.",
+                "Aseptic transmission."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Hospital acquired infection is medically known as **Nosocomial infection**."
+        },
+        {
+            id: 35,
+            question: "What is the primary action required before applying the Alcohol-based Hand Hygiene product?",
+            options: [
+                "Wet hands with water.",
+                "Ensure jewellery has been removed.",
+                "Fold sleeves.",
+                "Assess for cuts or breaks."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "The first listed step for ABH is: '1- Ensure jewellery has been removed.'"
+        },
+
+        // -----------------------------------------------------
+        // ORDERING & SYNTHESIS (Evaluation)
+        // -----------------------------------------------------
+        {
+            id: 36,
+            question: "Which sequence correctly follows 'Rub hands palm to palm' in the washing technique steps?",
+            options: [
+                "Palm to palm with fingers interlaced (C).",
+                "Right palm over left dorsum with interlaced fingers (B).",
+                "Backs of fingers to opposing palms (D).",
+                "Rotational rubbing of left thumb (E)."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "The sequence is A) Rub hands palm to palm, followed by B) Right palm over left dorsum with interlaced fingers."
+        },
+        {
+            id: 37,
+            question: "Which statement is TRUE regarding the use of towels for drying in the soap and water procedure?",
+            options: [
+                "A single towel must be used for both hands.",
+                "Use a dry towel for each hand.",
+                "Drying should proceed from the lower arms to the fingers.",
+                "The towel must be sterile."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Step I requires you to 'Use a dry towel for each hand.'"
+        },
+        {
+            id: 38,
+            question: "If a student needs to perform an aseptic procedure, which 'moment' is immediately relevant *before* starting?",
+            options: [
+                "Before touching the patient.",
+                "Before clean/aseptic procedure.",
+                "After touching the patient.",
+                "After touching the patient surrounding."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "The moment is explicitly named: 'Before clean/aseptic procedure' (Moment 2)."
+        },
+        {
+            id: 39,
+            question: "Which areas are the *most* frequently missed parts of the hand?",
+            options: [
+                "The entire palms and dorsum.",
+                "The fingertips, between fingers, and thumbs.",
+                "The wrists, forearms, and shoulders.",
+                "The knuckles and the center of the palms."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "The document stresses tips of fingers, between fingers, and the backs/sides of thumbs as frequently missed areas."
+        },
+        {
+            id: 40,
+            question: "Rearrange the following preparatory steps for hand washing: 1- Fold sleeves. 2- Apply soap. 3- Turn on water and wet hands. 4- Ensure jewellery has been removed.",
+            options: [
+                "4, 1, 3, 2",
+                "1, 4, 3, 2",
+                "4, 3, 1, 2",
+                "1, 3, 4, 2"
+            ],
+            correctAnswerIndex: 0,
+            explanation: "The full sequence is: Assess fingernails (Not listed), Assess cuts (Not listed), **4) Ensure jewellery has been removed**, Stand at sink (Not listed), **1) Fold sleeves**, **3) Turn on water and wet hands**, **2) Apply soap**."
+        }
+    ];
+
+    const USER_CHOICES_KEY = 'handHygieneQuizChoicesEN';
+
+    function loadUserChoices() {
+        try {
+            const choices = localStorage.getItem(USER_CHOICES_KEY);
+            return choices ? JSON.parse(choices) : {};
+        } catch (e) {
+            console.error("Error loading choices from localStorage:", e);
+            return {};
+        }
+    }
+
+    function saveUserChoice(questionId, choiceIndex) {
+        const choices = loadUserChoices();
+        choices[questionId] = choiceIndex;
+        try {
+            localStorage.setItem(USER_CHOICES_KEY, JSON.stringify(choices));
+        } catch (e) {
+            console.error("Error saving choice to localStorage:", e);
+        }
+    }
+
+    function checkAnswer(questionId, selectedIndex) {
+        const question = quizQuestions.find(q => q.id === questionId);
+        const isCorrect = selectedIndex === question.correctAnswerIndex;
+        saveUserChoice(questionId, selectedIndex);
+
+        const feedbackElement = document.getElementById(`feedback-${questionId}`);
+        const explanationElement = document.getElementById(`explanation-${questionId}`);
+        const options = document.querySelectorAll(`input[name="question-${questionId}"] + .option-label`);
+
+        // Reset feedback and styles
+        feedbackElement.style.display = 'block';
+        options.forEach(label => {
+            label.classList.remove('correct', 'incorrect', 'selected-option');
+        });
+
+        // Highlight selected option
+        document.getElementById(`option-${questionId}-${selectedIndex}`).nextElementSibling.classList.add('selected-option');
+
+        if (isCorrect) {
+            feedbackElement.className = 'feedback correct';
+            feedbackElement.textContent = '✅ Correct! Your answer is right.';
+        } else {
+            feedbackElement.className = 'feedback incorrect';
+            feedbackElement.textContent = '❌ Incorrect! The correct answer is:';
+        }
+
+        // Display explanation
+        explanationElement.innerHTML = `<p class="explanation"><strong>Concept:</strong> ${question.explanation}</p>`;
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        const userChoices = loadUserChoices();
+        container.innerHTML = '';
+
+        quizQuestions.forEach(q => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `
+                <div class="question-text">${q.id}. ${q.question}</div>
+            `;
+
+            q.options.forEach((option, index) => {
+                const isChecked = userChoices[q.id] !== undefined && userChoices[q.id] === index;
+                const optionId = `option-${q.id}-${index}`;
+
+                const radioInput = document.createElement('input');
+                radioInput.type = 'radio';
+                radioInput.id = optionId;
+                radioInput.name = `question-${q.id}`;
+                radioInput.value = index;
+                radioInput.checked = isChecked;
+
+                // Add event listener to check answer immediately on change
+                radioInput.addEventListener('change', () => {
+                    checkAnswer(q.id, index);
+                });
+
+                const label = document.createElement('label');
+                label.htmlFor = optionId;
+                label.className = 'option-label';
+                label.textContent = option;
+
+                // If the user has a stored choice, apply the initial selection style
+                if (isChecked) {
+                    label.classList.add('selected-option');
+                }
+
+                card.appendChild(radioInput);
+                card.appendChild(label);
+            });
+
+            const feedbackDiv = document.createElement('div');
+            feedbackDiv.id = `feedback-${q.id}`;
+            feedbackDiv.className = 'feedback';
+            card.appendChild(feedbackDiv);
+
+            const explanationDiv = document.createElement('div');
+            explanationDiv.id = `explanation-${q.id}`;
+            card.appendChild(explanationDiv);
+
+            container.appendChild(card);
+
+            // If a choice was loaded from storage, immediately check/display feedback
+            if (userChoices[q.id] !== undefined) {
+                checkAnswer(q.id, userChoices[q.id]);
+            }
+        });
+    }
+
+    // Initialize the quiz when the page loads
+    document.addEventListener('DOMContentLoaded', renderQuiz);
+</script>
+
+</body>
+</html>
