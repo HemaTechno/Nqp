@@ -735,7 +735,26 @@
 
     // Initialize the quiz when the page loads
     document.addEventListener('DOMContentLoaded', renderQuiz);
-</script>
 
+    // منع اختصارات النسخ (Ctrl+C / Ctrl+U / Ctrl+Shift+I ...)
+    document.addEventListener('keydown', function(e) {
+      if (
+        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C' || e.key === 's' || e.key === 'S' || e.key === 'x' || e.key === 'X')) ||
+        (e.key === 'F12')
+      ) {
+        e.preventDefault();
+        alert('🚫 النسخ أو الفحص معطل!');
+      }
+    });
+
+    // منع التحديد
+    document.addEventListener('selectstart', function(e) {
+      e.preventDefault();
+    });
+
+    // تأكيد منع الترجمة
+    document.documentElement.setAttribute('translate', 'no');
+    document.body.setAttribute('translate', 'no');
+  </script>
 </body>
 </html>
